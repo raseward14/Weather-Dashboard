@@ -1,0 +1,24 @@
+* {
+    /* border: 1px black solid; */
+}
+header {
+    color: white;
+    background-color: rgb(46, 45, 51);
+    text-align: center;
+    padding: 10px;
+}
+
+#search-block {
+    margin: 20px;
+}
+
+.list-group {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.list-item {
+    border: black 1px solid;
+    padding: 7px;
+    border-radius: 3px;
+}

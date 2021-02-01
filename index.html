@@ -27,7 +27,19 @@
     <header>
         <h1>Weather Dashboard</h1>
     </header>
-    <div class="container"></div>
+
+    <main class="container row">
+
+        <div class="col-4" id="search-block">
+            <h3>Search for a City:</h3>
+            <input id="city-name" type="text">
+            <input id="search-button" class="btn btn-primary" type="button" value="Search">
+            <ul class="list-group"></ul>
+        </div>
+
+        <div class="col-8" id="display-block"></div>
+
+    </main>
 
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
