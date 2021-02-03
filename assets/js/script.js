@@ -23,56 +23,82 @@ $(document).ready(function () {
     // function init gets api data
     function getApi() {
 
-        // create list item for each city, append to the city list
+        // for each click, create list item for each city, append to the city list
         var userList = document.querySelector('ul');
         var cityName = document.createElement('li');
         cityName.textContent = userInput.value;
         cityName.classList.add('list-item');
         userList.appendChild(cityName);
-        var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ cityName.textContent +'&appid=0f9dd32babe408905fb98d5398ec6131';
-
+        var currentDay = document.getElementById('current-day');
+        var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ cityName.textContent +'&per_page=6&appid=0f9dd32babe408905fb98d5398ec6131';
         console.log(cityName.textContent);
-        // console.log(requestUrl);
 
-
+        // fetch the url with the 5 day forecast
         fetch(requestUrl)
             .then(function (response) {
+
+                // return a json object
                 return response.json();
             })
             .then(function (data) {
+
                 console.log(data);
+                // and append the city name, and date to the dashboard container
+                var cityName = document.createElement('h2');
+                cityName.textContent = data.city.name;
+                currentDay.appendChild(cityName);
+
+
+                console.log('city name: ', data.city.name);
+                console.log('icon: ', data.list[0].weather.icon);
+                console.log('date: ', data.list[0].dt);
+                console.log('temperature: ', data.list[0].main.temp);
+                console.log('humidity: ', data.list[0].main.humidity);
+                console.log('wind speed: ', data.list[0].wind.speed);
+            // console.log('UV Index: 'data.list.);
+
+
                 for (var i = 0; i < data.length; i++) {
-                
+
+
                 // create elements to be added to page
-                var displayBlock = document.getElementById('display-block');
-                var city = document.createElement('h2');
-                var icon = document.createElement('i');
-                var date = document.createElement('h2');
-                var temperature = document.createElement('p');
-                var humidity = document.createElement('p');
-                var windSpeed = document.createElement('p');
-                var UVIndex = document.createElement('p');
+                // var icon = document.createElement('i');
+                // var date = document.createElement('h2');
+                // var temperature = document.createElement('p');
+                // var humidity = document.createElement('p');
+                // var windSpeed = document.createElement('p');
+                // var UVIndex = document.createElement('p');
+
+
 
                 // set text content of the elements
-                city.textContent = data[i].city.name;
-                icon.textContent = data[i].weather.icon;
-                date.textContent = data[i].timezone;
-                temperature.textContent = data[i].list.main.temp;
-                humidity.textContent = data[i].main.humidity;
-                windSpeed.textContent = data[i].wind.speed;
-                UVIndex.textContent = data[i].sys.country;
-                console.log(list.main.temp);
+                // icon.textContent = data[i].weather.icon;
+                // date.textContent = data[i].timezone;
+                // temperature.textContent = data[i].list.main.temp;
+                // humidity.textContent = data[i].main.humidity;
+                // windSpeed.textContent = data[i].wind.speed;
+                // UVIndex.textContent = data[i].sys.country;
+                
+
+
+                // cityName.textContent = data.city.name;
+                // icon.textContent = 'icon';
+                // date.textContent = 'date';
+                // temperature.textContent = 'temperature';
+                // humidity.textContent = 'humidity';
+                // windSpeed.textContent = 'wind speed';
+                // UVIndex.textContent = 'UV';
+
                 
                 // dynamically append the elements to the page
-                displayBlock.appendChild(city);
-                displayBlock.appendChild(icon);
-                displayBlock.appendChild(date);
-                displayBlock.appendChild(temperature);
-                displayBlock.appendChild(humidity);
-                displayBlock.appendChild(windSped);
-                displayBlock.appendChild(UVIndex);
-
+                // dashboardContainer.appendChild(icon);
+                // dashboardContainer.appendChild(date);
+                // dashboardContainer.appendChild(temperature);
+                // dashboardContainer.appendChild(humidity);
+                // dashboardContainer.appendChild(windSped);
+                // dashboardContainer.appendChild(UVIndex);
                 }
+
             })
     }
 

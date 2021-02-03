@@ -28,17 +28,22 @@
         <h1>Weather Dashboard</h1>
     </header>
 
-    <main class="container row">
+    <main class="fluid-container">
+        <div class="row">
+            <div class="col-md-4" id="search-block">
+                <h3>Search for a City:</h3>
+                <input id="user-input" type="text">
+                <button id="search-button" class="btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
+                <ul class="list-group"></ul>
+            </div>
 
-        <div class="col-4" id="search-block">
-            <h3>Search for a City:</h3>
-            <input id="user-input" type="text">
-            <input id="search-button" class="btn btn-primary" type="button" value="Search">
-            <ul class="list-group"></ul>
+            <div class="col-md-7" id="dashboard-container">
+                <div id="current-day"></div>
+                <div id="forecast">
+                    <h3>5-Day Forecast:</h3>
+                </div>
+            </div>
         </div>
-
-        <div class="col-8" id="display-block"></div>
-
     </main>
 
 

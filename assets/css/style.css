@@ -9,6 +9,29 @@ header {
 }
 
 #search-block {
+    margin: 0px;
+    background-color: rgb(236, 235, 240);
+    min-height: 88vh;
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+#user-input {
+    width: 15vw;
+    border-radius: 3px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#current-day {
+    border:  rgb(173, 173, 177) 1px solid;
+    border-radius: 3px;
+    min-height: 50vh;
+    margin: 15px 5px;
+    padding: 20px;
+}
+
+#dashboard-container {
     margin: 20px;
 }
 
@@ -18,8 +41,10 @@ header {
 }
 
 .list-item {
-    border: black 1px solid;
-    padding: 7px;
+    border:  rgb(173, 173, 177) 1px solid;
+    padding: 10px;
+    font-size: 20px;
     border-radius: 3px;
     vertical-align: center;
+    background-color: white;
 }
