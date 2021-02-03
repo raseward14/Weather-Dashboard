@@ -1,7 +1,5 @@
 // test all these url's in postman first to make sure im getting back what i want to get back!!
 // - Your API key is 0f9dd32babe408905fb98d5398ec6131
-// API key:
-// - Your API key is 0f9dd32babe408905fb98d5398ec6131
 // - Within the next couple of hours, it will be activated and ready to use
 // - You can later create more API keys on your account page
 // - Please, always use your API key in each API call
@@ -17,47 +15,69 @@
 
 $(document).ready(function () {
 
-    // global var's
-        // var requestUrl, searchBtn, cityName
+    // var requestUrl, searchBtn, cityName
     var searchBtn = document.getElementById('search-button');
-    var cityName = document.getElementById('city-name');
-    var requestUrl = 'api.openweathermap.org/data/2.5/weather?q=${cityName}&appid={0f9dd32babe408905fb98d5398ec6131}';
+    var userInput = document.getElementById('user-input');
 
+   
     // function init gets api data
     function getApi() {
+
         // create list item for each city, append to the city list
-        var cityList = document.querySelector('ul');
-        var listItem = document.createElement('li');
-        listItem.textContent = cityName.value;
-        listItem.classList.add('list-item')
-        cityList.appendChild(listItem);
+        var userList = document.querySelector('ul');
+        var cityName = document.createElement('li');
+        cityName.textContent = userInput.value;
+        cityName.classList.add('list-item');
+        userList.appendChild(cityName);
+        var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ cityName.textContent +'&appid=0f9dd32babe408905fb98d5398ec6131';
+
+        console.log(cityName.textContent);
+        // console.log(requestUrl);
+
 
         fetch(requestUrl)
             .then(function (response) {
-                return response.json()
+                return response.json();
             })
             .then(function (data) {
+                console.log(data);
                 for (var i = 0; i < data.length; i++) {
+                
+                // create elements to be added to page
+                var displayBlock = document.getElementById('display-block');
+                var city = document.createElement('h2');
+                var icon = document.createElement('i');
+                var date = document.createElement('h2');
+                var temperature = document.createElement('p');
+                var humidity = document.createElement('p');
+                var windSpeed = document.createElement('p');
+                var UVIndex = document.createElement('p');
 
+                // set text content of the elements
+                city.textContent = data[i].city.name;
+                icon.textContent = data[i].weather.icon;
+                date.textContent = data[i].timezone;
+                temperature.textContent = data[i].list.main.temp;
+                humidity.textContent = data[i].main.humidity;
+                windSpeed.textContent = data[i].wind.speed;
+                UVIndex.textContent = data[i].sys.country;
+                console.log(list.main.temp);
+                
+                // dynamically append the elements to the page
+                displayBlock.appendChild(city);
+                displayBlock.appendChild(icon);
+                displayBlock.appendChild(date);
+                displayBlock.appendChild(temperature);
+                displayBlock.appendChild(humidity);
+                displayBlock.appendChild(windSped);
+                displayBlock.appendChild(UVIndex);
 
                 }
             })
     }
 
-
-// function getApi()
-    // var cityEl = url for a cities weather
-    // create a todayEl
-    // create a 5dayForecastEl
-    // date
-    // city
-    // temp, humidity, windspeed, uv index
-    // icon
-
-
-// add event listener search button 'click' getApi(requestUrl) function
-searchBtn.addEventListener('click', getApi);
-
-// local storage, dont need to push cities to an array
-// refresh saves the last city that she looked up, will be displayed on page
+    // add event listener search button 'click' getApi(requestUrl) function
+    searchBtn.addEventListener('click', getApi);
+    // local storage, dont need to push cities to an array
+    // refresh saves the last city that she looked up, will be displayed on page
 });

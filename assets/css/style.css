@@ -21,4 +21,5 @@ header {
     border: black 1px solid;
     padding: 7px;
     border-radius: 3px;
+    vertical-align: center;
 }
