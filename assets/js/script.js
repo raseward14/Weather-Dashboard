@@ -17,19 +17,19 @@ $(document).ready(function () {
 
 
     // function init gets api data
-    function getApi() {
+    function getApi(searchTerm) {
 
-        
+        // var searchTerm = userInput.value;
+        if (searchTerm === 'undefined') {
+          searchTerm = userInput.value;
+        }
+
+        userInput.value = '';
+        storeCities(searchTerm);
         // for each click, create list item for each city, append to the city list
-        var userList = document.querySelector('ul');
-        var cityName = document.createElement('li');
-        cityName.textContent = userInput.value;
-        cityName.classList.add('list-item');
-        userList.appendChild(cityName);
         var currentDay = document.getElementById('current-day');
-        var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityName.textContent + '&units=imperial&appid=0f9dd32babe408905fb98d5398ec6131';
+        var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + searchTerm + '&units=imperial&appid=0f9dd32babe408905fb98d5398ec6131';
 
-        console.log(cityName.textContent);
 
         // fetch the url with the 5 day forecast
         fetch(requestUrl)
@@ -47,7 +47,7 @@ $(document).ready(function () {
                 cityName.textContent = data.city.name;
                 currentDay.appendChild(cityName);
                 var date = document.createElement('h3');
-                date.textContent = data.list[0].dt_txt
+                date.textContent = data.list[0].dt_txt;
                 cityName.append(date);
 
                 // var icon = document.createElement('symbol');
@@ -55,16 +55,16 @@ $(document).ready(function () {
                 // currentDay.appendChild(icon);
 
                 var temperature = document.createElement('p');
-                temperature.textContent = ('Temperature ' + data.list[0].main.temp + '\u00B0F');
+                temperature.textContent = ('Temperature: ' + data.list[0].main.temp + '\u00B0F');
                 currentDay.appendChild(temperature);
 
                 var humidity = document.createElement('p');
-                humidity.textContent = ('Humidity ' + data.list[0].main.humidity + '%');
+                humidity.textContent = ('Humidity: ' + data.list[0].main.humidity + '%');
                 currentDay.appendChild(humidity);
 
 
                 var windSpeed = document.createElement('p');
-                windSpeed.textContent = ('Wind Speed ' + data.list[0].wind.speed + ' MPH');
+                windSpeed.textContent = ('Wind Speed: ' + data.list[0].wind.speed + ' MPH');
                 currentDay.appendChild(windSpeed);
 
                 console.log('date: ', data.list[0].dt_txt);
@@ -83,18 +83,56 @@ $(document).ready(function () {
                     var forecastHumidity = document.createElement('p');
 
                     forecastDate.textContent = data.list[i].dt_txt;
-                    forecastHumidity.textContent = ('Humidity ' + data.list[i].main.humidity + '%');
-                    forecastTemp.textContent = ('Temperature ' + data.list[i].main.temp + '\u00B0F');
+                    forecastHumidity.textContent = ('Humidity: ' + data.list[i].main.humidity + '%');
+                    forecastTemp.textContent = ('Temperature: ' + data.list[i].main.temp + '\u00B0F');
 
                     day.appendChild(forecastDate);
                     day.appendChild(forecastTemp);
                     day.appendChild(forecastHumidity);
-
                 }
-
+                renderHistory()
             })
+    }
+
+    function storeCities(searchTerm) {
+        var cities = getCities();
+        cities.push(searchTerm);
+        localStorage.setItem('searchHistory', JSON.stringify(cities));
+    }
+
+    function getCities() {
+        var cities = localStorage.getItem('searchHistory');
+        if (cities !== null) {
+            cities = JSON.parse(cities);
+        } else {
+            cities = [];
+        }
+        return cities;
+    }
+
+    function renderHistory() {
+
+        var cities = getCities();
+        var userList = document.querySelector('ul');
+        userList.innerHTML = null;
+        for (let i = 0; i < cities.length; i++) {
+            var cityName = document.createElement('li');
+            cityName.textContent = cities[i];
+            cityName.classList.add('list-item');
+            cityName.addEventListener('click', getButtonValue);
+            userList.appendChild(cityName);
+        }
 
     }
+
+    function getButtonValue() {
+        var searchTerm = this.textContent;
+        console.log(searchTerm);
+        getApi(searchTerm);
+    }
+
+    renderHistory();
+    // api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt=6&appid=0f9dd32babe408905fb98d5398ec6131
 
     // add event listener search button 'click' getApi(requestUrl) function
     searchBtn.addEventListener('click', getApi);
