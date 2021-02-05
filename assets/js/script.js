@@ -1,7 +1,5 @@
-// test all these url's in postman first to make sure im getting back what i want to get back!!
 // - Your API key is 0f9dd32babe408905fb98d5398ec6131
 // - Within the next couple of hours, it will be activated and ready to use
-// - You can later create more API keys on your account page
 // - Please, always use your API key in each API call
 
 // Endpoint:
@@ -12,17 +10,16 @@
 // Useful links:
 // - API documentation https://openweathermap.org/api
 
-
 $(document).ready(function () {
-
     // var requestUrl, searchBtn, cityName
     var searchBtn = document.getElementById('search-button');
     var userInput = document.getElementById('user-input');
 
-   
+
     // function init gets api data
     function getApi() {
 
+        
         // for each click, create list item for each city, append to the city list
         var userList = document.querySelector('ul');
         var cityName = document.createElement('li');
@@ -30,7 +27,8 @@ $(document).ready(function () {
         cityName.classList.add('list-item');
         userList.appendChild(cityName);
         var currentDay = document.getElementById('current-day');
-        var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ cityName.textContent +'&per_page=6&appid=0f9dd32babe408905fb98d5398ec6131';
+        var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityName.textContent + '&units=imperial&appid=0f9dd32babe408905fb98d5398ec6131';
+
         console.log(cityName.textContent);
 
         // fetch the url with the 5 day forecast
@@ -43,63 +41,59 @@ $(document).ready(function () {
             .then(function (data) {
 
                 console.log(data);
-                // and append the city name, and date to the dashboard container
+                // and append the city name, date, temp, humidity, widnspeed, uvindex to the dashboard container
+
                 var cityName = document.createElement('h2');
                 cityName.textContent = data.city.name;
                 currentDay.appendChild(cityName);
+                var date = document.createElement('h3');
+                date.textContent = data.list[0].dt_txt
+                cityName.append(date);
+
+                // var icon = document.createElement('symbol');
+                // icon = data.list[0].weather.icon.value;
+                // currentDay.appendChild(icon);
+
+                var temperature = document.createElement('p');
+                temperature.textContent = ('Temperature ' + data.list[0].main.temp + '\u00B0F');
+                currentDay.appendChild(temperature);
+
+                var humidity = document.createElement('p');
+                humidity.textContent = ('Humidity ' + data.list[0].main.humidity + '%');
+                currentDay.appendChild(humidity);
 
 
-                console.log('city name: ', data.city.name);
-                console.log('icon: ', data.list[0].weather.icon);
-                console.log('date: ', data.list[0].dt);
-                console.log('temperature: ', data.list[0].main.temp);
-                console.log('humidity: ', data.list[0].main.humidity);
-                console.log('wind speed: ', data.list[0].wind.speed);
-            // console.log('UV Index: 'data.list.);
+                var windSpeed = document.createElement('p');
+                windSpeed.textContent = ('Wind Speed ' + data.list[0].wind.speed + ' MPH');
+                currentDay.appendChild(windSpeed);
+
+                console.log('date: ', data.list[0].dt_txt);
 
 
-                for (var i = 0; i < data.length; i++) {
+                // 5 days, 1 day is 24 hours, 3 hour increments, 8 increments is 1 day, 40 increments is 5 days, if it can be divided by 8, its a day i want to print to the page
+                var dayForecast = document.getElementById('day-forecast')
 
+                for (let i = 8; i < data.list.length; i+=8) {
+                    var day = document.createElement('div');
+                    day.classList.add('forecast');
+                    dayForecast.appendChild(day);
 
-                // create elements to be added to page
-                // var icon = document.createElement('i');
-                // var date = document.createElement('h2');
-                // var temperature = document.createElement('p');
-                // var humidity = document.createElement('p');
-                // var windSpeed = document.createElement('p');
-                // var UVIndex = document.createElement('p');
+                    var forecastDate = document.createElement('p');
+                    var forecastTemp = document.createElement('p');
+                    var forecastHumidity = document.createElement('p');
 
+                    forecastDate.textContent = data.list[i].dt_txt;
+                    forecastHumidity.textContent = ('Humidity ' + data.list[i].main.humidity + '%');
+                    forecastTemp.textContent = ('Temperature ' + data.list[i].main.temp + '\u00B0F');
 
+                    day.appendChild(forecastDate);
+                    day.appendChild(forecastTemp);
+                    day.appendChild(forecastHumidity);
 
-                // set text content of the elements
-                // icon.textContent = data[i].weather.icon;
-                // date.textContent = data[i].timezone;
-                // temperature.textContent = data[i].list.main.temp;
-                // humidity.textContent = data[i].main.humidity;
-                // windSpeed.textContent = data[i].wind.speed;
-                // UVIndex.textContent = data[i].sys.country;
-                
-
-
-                // cityName.textContent = data.city.name;
-                // icon.textContent = 'icon';
-                // date.textContent = 'date';
-                // temperature.textContent = 'temperature';
-                // humidity.textContent = 'humidity';
-                // windSpeed.textContent = 'wind speed';
-                // UVIndex.textContent = 'UV';
-
-                
-                // dynamically append the elements to the page
-                // dashboardContainer.appendChild(icon);
-                // dashboardContainer.appendChild(date);
-                // dashboardContainer.appendChild(temperature);
-                // dashboardContainer.appendChild(humidity);
-                // dashboardContainer.appendChild(windSped);
-                // dashboardContainer.appendChild(UVIndex);
                 }
 
             })
+
     }
 
     // add event listener search button 'click' getApi(requestUrl) function

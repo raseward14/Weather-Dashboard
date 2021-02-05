@@ -48,3 +48,23 @@ header {
     vertical-align: center;
     background-color: white;
 }
+
+div #day-forecast {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.forecast {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    background-color: blue;
+    border-radius: 3px;
+    height: 20vh;
+    margin: 10px;
+    color: white;
+    padding: 10px;
+}
+
