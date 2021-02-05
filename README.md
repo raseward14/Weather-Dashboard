@@ -24,6 +24,7 @@ I learned a lot from writing the entire code in JS, assigning data hour attribut
 ## Credits
 Here are a few resources that helped me get this project knocked out!
 * [OpenWeather](https://openweathermap.org/appid)
+* [stackoverflow](https://stackoverflow.com/questions/7231873/javascript-undefined-condition)
 
 ## License
 ©2021 Richard Seward. All Rights Reserved.

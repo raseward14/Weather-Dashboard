@@ -44,13 +44,10 @@ $(document).ready(function () {
                 var cityName = document.createElement('h2');
                 cityName.textContent = data.city.name;
                 currentDay.appendChild(cityName);
+
                 var date = document.createElement('h3');
                 date.textContent = data.list[0].dt_txt;
                 cityName.append(date);
-
-                // var icon = document.createElement('img');
-                // icon.innerHTML = data.list[0].weather.icon;
-                // currentDay.appendChild(icon);
 
                 var temperature = document.createElement('p');
                 temperature.textContent = ('Temperature: ' + data.list[0].main.temp + '\u00B0F');
@@ -81,6 +78,7 @@ $(document).ready(function () {
                     var forecastHumidity = document.createElement('p');
 
                     forecastDate.textContent = data.list[i].dt_txt;
+                    
                     forecastHumidity.textContent = ('Humidity: ' + data.list[i].main.humidity + '%');
                     forecastTemp.textContent = ('Temperature: ' + data.list[i].main.temp + '\u00B0F');
 
@@ -113,6 +111,11 @@ $(document).ready(function () {
                         var UVI = document.createElement('p');
                         UVI.textContent = ('UV Index: ' + result.current.uvi + '%');
                         currentDay.appendChild(UVI);
+
+                        var icon = document.createElement('img');
+                        icon.textContent = result.current.weather.icon;
+                        currentDay.appendChild(icon);
+        
 
                     })
                     .catch(error => { console.log('error', error) });
