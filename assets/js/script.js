@@ -45,6 +45,7 @@ $(document).ready(function () {
                 cityName.textContent = data.city.name;
                 currentDay.appendChild(cityName);
 
+
                 var date = document.createElement('h3');
                 date.textContent = data.list[0].dt_txt;
                 cityName.append(date);
@@ -57,7 +58,6 @@ $(document).ready(function () {
                 humidity.textContent = ('Humidity: ' + data.list[0].main.humidity + '%');
                 currentDay.appendChild(humidity);
 
-
                 var windSpeed = document.createElement('p');
                 windSpeed.textContent = ('Wind Speed: ' + data.list[0].wind.speed + ' MPH');
                 currentDay.appendChild(windSpeed);
@@ -68,7 +68,7 @@ $(document).ready(function () {
                 // 5 days, 1 day is 24 hours, 3 hour increments, 8 increments is 1 day, 40 increments is 5 days, if it can be divided by 8, its a day i want to print to the page
                 var dayForecast = document.getElementById('day-forecast');
                 dayForecast.innerHTML = [];
-                for (let i = 8; i < data.list.length; i += 8) {
+                for (let i = 0; i < data.list.length; i += 8) {
                     var day = document.createElement('div');
                     day.classList.add('forecast');
                     dayForecast.appendChild(day);
