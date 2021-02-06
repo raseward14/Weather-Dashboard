@@ -109,13 +109,34 @@ $(document).ready(function () {
                         console.log(result.lon);
 
                         var UVI = document.createElement('p');
-                        UVI.textContent = ('UV Index: ' + result.current.uvi + '%');
+                        var UVIndex = document.createElement('span');
+                        UVIndex.textContent = result.current.uvi;
+                        console.log(UVIndex.textContent);
+                        UVI.textContent = ('UV Index: ');
+                        UVI.appendChild(UVIndex);
                         currentDay.appendChild(UVI);
+                        var a = result.current.uvi;
+                        console.log(a);
+
+
+                        if (a < 2) {
+                            // a.classList.remove('moderate');
+                            // a.classList.remove('severe');
+                            UVIndex.classList.add('favorable');
+                        } 
+                        else if (a > 2 && a < 6) {
+                            // a.classList.remove('favorable');
+                            // a.classList.remove('severe');
+                            UVIndex.classList.add('moderate');
+                        } else {
+                            // a.classList.remove('moderate');
+                            // a.classList.remove('favorable');
+                            UVIndex.classList.add('severe');
+                        }
 
                         var icon = document.createElement('img');
                         icon.textContent = result.current.weather.icon;
                         currentDay.appendChild(icon);
-        
 
                     })
                     .catch(error => { console.log('error', error) });
