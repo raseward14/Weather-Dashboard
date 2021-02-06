@@ -165,7 +165,7 @@ $(document).ready(function () {
         var firstDay = document.querySelector('[day-number="1"]');
         var iconOne = document.createElement('img');
         iconOne.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[0].weather[0].icon}@2x.png`);
-        firstDay.appendChild(iconOne);
+        firstDay.append(iconOne);
         var firstDate = document.createElement('p');
         firstDate.textContent = moment().add(1, 'days').format('l');
         firstDay.prepend(firstDate);
