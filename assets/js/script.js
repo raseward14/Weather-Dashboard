@@ -44,11 +44,12 @@ $(document).ready(function () {
 
                 var icon = document.createElement('img');
                 icon.setAttribute('src', `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`)
-                cityName.appendChild(icon);
+                cityName.append(icon);
 
                 var date = document.createElement('h3');
-                date.textContent = data.list[0].dt_txt;
-                cityName.append(date);
+                date.textContent = moment().format('l');
+                cityName.appendChild(date);
+                console.log(moment().format('l'));
 
                 var temperature = document.createElement('p');
                 temperature.textContent = ('Temperature: ' + data.list[0].main.temp + '\u00B0F');
@@ -140,19 +141,19 @@ $(document).ready(function () {
             day.setAttribute('day-number', i);
             dayForecast.appendChild(day);
 
-            console.log(result.daily[i].dt);
+            // console.log(result.daily[i].dt);
             console.log(result.daily[i].temp.day);
             console.log(result.daily[i].humidity);
 
-            var forecastDate = document.createElement('p');
+            // var forecastDate = document.createElement('p');
             var forecastTemp = document.createElement('p');
             var forecastHumidity = document.createElement('p');
 
-            forecastDate.textContent = result.daily[i].dt;
+            // forecastDate.textContent = result.daily[i].dt;
             forecastHumidity.textContent = ('Humidity: ' + result.daily[i].humidity + '%');
             forecastTemp.textContent = ('Temperature: ' + result.daily[i].temp.day + '\u00B0F');
 
-            day.appendChild(forecastDate);
+            // day.appendChild(forecastDate);
             day.appendChild(forecastTemp);
             day.appendChild(forecastHumidity);
         }
@@ -166,18 +167,21 @@ $(document).ready(function () {
         iconOne.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[0].weather[0].icon}@2x.png`);
         firstDay.appendChild(iconOne);
         console.log(firstDay);
+        console.log(moment().calendar())
 
         var secondDay = document.querySelector('[day-number="2"]');
         var iconTwo = document.createElement('img');
         iconTwo.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[1].weather[0].icon}@2x.png`);
         secondDay.appendChild(iconTwo);
         console.log(secondDay);
+        console.log()
 
         var thirdDay = document.querySelector('[day-number="3"]');
         var iconThree = document.createElement('img');
         iconThree.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[2].weather[0].icon}@2x.png`);
         thirdDay.appendChild(iconThree);
         console.log(thirdDay);
+        console.log()
 
         var fourthDay = document.querySelector('[day-number="4"]');
         var iconFour = document.createElement('img');
