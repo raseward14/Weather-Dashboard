@@ -241,7 +241,7 @@ $(document).ready(function () {
             cityName.textContent = cities[i];
             cityName.classList.add('list-item');
             cityName.addEventListener('click', getButtonValue);
-            userList.appendChild(cityName);
+            userList.prepend(cityName);
         }
 
     }
