@@ -20,7 +20,7 @@ Retrieving data from API's, and working with more complex local storage were the
 
 ## Usage
 * **The Finished Product**  
-![Random Password Generator](assets/images/scheduler.png)
+![Weather Dashboard](assets/images/weatherdashboard-sm.png)
 
 ## Credits
 Here are a few resources that helped me get this project knocked out!
