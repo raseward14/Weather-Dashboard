@@ -108,17 +108,11 @@ $(document).ready(function () {
                 console.log(a);
 
                 if (a <= 2) {
-                    // a.classList.remove('moderate');
-                    // a.classList.remove('severe');
                     UVIndex.classList.add('favorable');
                 }
                 else if (a > 2 && a < 6) {
-                    // a.classList.remove('favorable');
-                    // a.classList.remove('severe');
                     UVIndex.classList.add('moderate');
                 } else {
-                    // a.classList.remove('moderate');
-                    // a.classList.remove('favorable');
                     UVIndex.classList.add('severe');
                 }
 
