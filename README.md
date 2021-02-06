@@ -9,7 +9,7 @@ Additionally, retrieving the UV Index required a seperate API call as my first A
 
 This site features dynamically updated HTML and CSS.
 
-**[Check it out Here!](https://raseward14.github.io/Work-Day-Scheduler/)**
+**[Check it out Here!](https://raseward14.github.io/Weather-Dashboard/)**
 
 Retrieving data from API's, and working with more complex local storage were the biggest takeaways from this project. The end product is actually pretty cool, so feel free to check it out!
 
