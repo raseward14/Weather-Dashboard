@@ -159,41 +159,49 @@ $(document).ready(function () {
         }
     }
 
-    // add icon images to 5 day forecast based on each days data attribute
+    // add icon images and dates to 5 day forecast based on each days data attribute
     function weatherIcons(result) {
 
         var firstDay = document.querySelector('[day-number="1"]');
         var iconOne = document.createElement('img');
         iconOne.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[0].weather[0].icon}@2x.png`);
         firstDay.appendChild(iconOne);
-        console.log(firstDay);
-        console.log(moment().calendar())
+        var firstDate = moment().add(1, 'days').format('l');
+        firstDay.append(firstDate);
+        console.log(moment().add(1, 'days').format('l'));
 
         var secondDay = document.querySelector('[day-number="2"]');
         var iconTwo = document.createElement('img');
         iconTwo.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[1].weather[0].icon}@2x.png`);
         secondDay.appendChild(iconTwo);
-        console.log(secondDay);
-        console.log()
+        var secondDate = moment().add(2, 'days').format('l');
+        secondDay.append(secondDate);
+        console.log(moment().add(2, 'days').format('l'));
 
         var thirdDay = document.querySelector('[day-number="3"]');
         var iconThree = document.createElement('img');
         iconThree.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[2].weather[0].icon}@2x.png`);
         thirdDay.appendChild(iconThree);
-        console.log(thirdDay);
-        console.log()
+        var thirdDate = moment().add(3, 'days').format('l');
+        thirdDay.append(thirdDate);
+        console.log(moment().add(3, 'days').format('l'));
 
         var fourthDay = document.querySelector('[day-number="4"]');
         var iconFour = document.createElement('img');
         iconFour.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[3].weather[0].icon}@2x.png`);
         fourthDay.appendChild(iconFour);
-        console.log(fourthDay);
+        var fourthDate = moment().add(4, 'days').format('l');
+        fourthDay.append(fourthDate);
+        console.log(moment().add(4, 'days').format('l'));
+
         
         var fifthDay = document.querySelector('[day-number="5"]');
         var iconFive = document.createElement('img');
         iconFive.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[4].weather[0].icon}@2x.png`);
         fifthDay.appendChild(iconFive);
-        console.log(fifthDay);
+        var fifthDate = moment().add(5, 'days').format('l');
+        fifthDay.append(fifthDate);
+        console.log(moment().add(5, 'days').format('l'));
 
     }
 
