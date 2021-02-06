@@ -37,7 +37,7 @@ $(document).ready(function () {
             .then(function (data) {
 
                 console.log(data);
-                // and append the city name, date, temp, humidity, widnspeed, uvindex to the dashboard container
+                // and append the city name, date, temp, humidity, widnspeed, uvindex to the dashboard container current day
                 var cityName = document.createElement('h2');
                 cityName.textContent = data.city.name;
                 currentDay.appendChild(cityName);
@@ -63,29 +63,6 @@ $(document).ready(function () {
                 currentDay.appendChild(windSpeed);
 
                 console.log('date: ', data.list[0].dt_txt);
-
-
-                // 5 days, 1 day is 24 hours, 3 hour increments, 8 increments is 1 day, 40 increments is 5 days, if it can be divided by 8, its a day i want to print to the page
-                // var dayForecast = document.getElementById('day-forecast');
-                // dayForecast.innerHTML = [];
-                // for (let i = 0; i < data.list.length; i += 8) {
-                //     var day = document.createElement('div');
-                //     day.classList.add('forecast');
-                //     dayForecast.appendChild(day);
-
-                //     var forecastDate = document.createElement('p');
-                //     var forecastTemp = document.createElement('p');
-                //     var forecastHumidity = document.createElement('p');
-
-                //     forecastDate.textContent = data.list[i].dt_txt;
-
-                //     forecastHumidity.textContent = ('Humidity: ' + data.list[i].main.humidity + '%');
-                //     forecastTemp.textContent = ('Temperature: ' + data.list[i].main.temp + '\u00B0F');
-
-                //     day.appendChild(forecastDate);
-                //     day.appendChild(forecastTemp);
-                //     day.appendChild(forecastHumidity);
-                // }
 
                 renderHistory()
 
@@ -146,8 +123,6 @@ $(document).ready(function () {
 
                 dailyForecast(result);
                 weatherIcons(result);
-
-                return result;
             })
             .catch(error => { console.log('error', error) });
     }
@@ -183,6 +158,7 @@ $(document).ready(function () {
         }
     }
 
+    // add icon images to 5 day forecast based on each days data attribute
     function weatherIcons(result) {
 
         var firstDay = document.querySelector('[day-number="1"]');
@@ -190,7 +166,6 @@ $(document).ready(function () {
         iconOne.setAttribute('src', `https://openweathermap.org/img/wn/${result.daily[0].weather[0].icon}@2x.png`);
         firstDay.appendChild(iconOne);
         console.log(firstDay);
-
 
         var secondDay = document.querySelector('[day-number="2"]');
         var iconTwo = document.createElement('img');
