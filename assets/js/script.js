@@ -1,5 +1,4 @@
 // - Your API key is 0f9dd32babe408905fb98d5398ec6131
-// - Within the next couple of hours, it will be activated and ready to use
 // - Please, use the endpoint api.openweathermap.org for your API calls
 // Useful links:
 // - API documentation https://openweathermap.org/api
@@ -36,7 +35,6 @@ $(document).ready(function () {
             })
             .then(function (data) {
 
-                console.log(data);
                 // and append the city name, date, temp, humidity, widnspeed, uvindex to the dashboard container current day
                 var cityName = document.createElement('h2');
                 cityName.textContent = data.city.name;
@@ -49,7 +47,6 @@ $(document).ready(function () {
                 var date = document.createElement('h3');
                 date.textContent = moment().format('l');
                 cityName.appendChild(date);
-                console.log(moment().format('l'));
 
                 var temperature = document.createElement('p');
                 temperature.textContent = ('Temperature: ' + data.list[0].main.temp + '\u00B0F');
@@ -63,18 +60,12 @@ $(document).ready(function () {
                 windSpeed.textContent = ('Wind Speed: ' + data.list[0].wind.speed + ' MPH');
                 currentDay.appendChild(windSpeed);
 
-                console.log('date: ', data.list[0].dt_txt);
-
                 renderHistory()
 
                 var lat = data.city.coord.lat;
-                console.log(data.city.coord.lat);
                 var lon = data.city.coord.lon;
-                console.log(data.city.coord.lon);
 
                 getUVIndex(lat, lon)
-
-
             })
     }
 
@@ -90,10 +81,6 @@ $(document).ready(function () {
         fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&units=imperial&appid=0f9dd32babe408905fb98d5398ec6131", requestOptions)
             .then(response => { return response.json() })
             .then(result => {
-                console.log(result);
-                console.log(result.current.uvi);
-                console.log(result.lat);
-                console.log(result.lon);
 
                 var UVI = document.createElement('p');
                 var UVIndex = document.createElement('span');
@@ -105,7 +92,6 @@ $(document).ready(function () {
                 currentDay.appendChild(UVI);
 
                 var a = result.current.uvi;
-                console.log(a);
 
                 if (a <= 2) {
                     UVIndex.classList.add('favorable');
@@ -124,7 +110,6 @@ $(document).ready(function () {
 
     // retrieve 5day forecast
     function dailyForecast(result) {
-        console.log(result);
 
         // start at index 1, current day is already printed above, stop at index 5
         var dayForecast = document.getElementById('day-forecast');
@@ -134,10 +119,6 @@ $(document).ready(function () {
             day.classList.add('forecast');
             day.setAttribute('day-number', i);
             dayForecast.appendChild(day);
-
-            // console.log(result.daily[i].dt);
-            console.log(result.daily[i].temp.day);
-            console.log(result.daily[i].humidity);
 
             // var forecastDate = document.createElement('p');
             var forecastTemp = document.createElement('p');
@@ -163,7 +144,6 @@ $(document).ready(function () {
         var firstDate = document.createElement('p');
         firstDate.textContent = moment().add(1, 'days').format('l');
         firstDay.prepend(firstDate);
-        console.log(moment().add(1, 'days').format('l'));
 
         var secondDay = document.querySelector('[day-number="2"]');
         var iconTwo = document.createElement('img');
@@ -172,7 +152,6 @@ $(document).ready(function () {
         var secondDate = document.createElement('p');
         secondDate.textContent = moment().add(2, 'days').format('l');
         secondDay.prepend(secondDate);
-        console.log(moment().add(2, 'days').format('l'));
 
         var thirdDay = document.querySelector('[day-number="3"]');
         var iconThree = document.createElement('img');
@@ -181,7 +160,6 @@ $(document).ready(function () {
         var thirdDate = document.createElement('p');
         thirdDate.textContent = moment().add(3, 'days').format('l');
         thirdDay.prepend(thirdDate);
-        console.log(moment().add(3, 'days').format('l'));
 
         var fourthDay = document.querySelector('[day-number="4"]');
         var iconFour = document.createElement('img');
@@ -190,8 +168,6 @@ $(document).ready(function () {
         var fourthDate = document.createElement('p');
         fourthDate.textContent = moment().add(4, 'days').format('l');
         fourthDay.prepend(fourthDate);
-        console.log(moment().add(4, 'days').format('l'));
-
         
         var fifthDay = document.querySelector('[day-number="5"]');
         var iconFive = document.createElement('img');
@@ -200,8 +176,6 @@ $(document).ready(function () {
         var fifthDate = document.createElement('p');
         fifthDate.textContent = moment().add(5, 'days').format('l');
         fifthDay.prepend(fifthDate);
-        console.log(moment().add(5, 'days').format('l'));
-
     }
 
     // set search terms to local storage
@@ -249,7 +223,6 @@ $(document).ready(function () {
     function getButtonValue() {
         // searchterm from url is this buttons text
         var searchTerm = this.textContent;
-        console.log(typeof searchTerm);
         // get api data with searchterm
         getApi(searchTerm);
     }
